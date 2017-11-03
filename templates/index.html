@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>WWCS Online Test</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+{#    <link href="starter-template.css" rel="stylesheet">#}
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse fixed-top">
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="#">Online Test WWCS</a>
+
+
+    </nav>
+
+    <div class="container main">
+        <div class="row">
+            <div class="col-md-6">
+                <h4> Walk With A Civil Servant Online Learning</h4>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-10 categories">
+                <div class="row">
+                    {% for question in questions %}
+                    <div>
+                    <hr>
+                    <strong>{{ question.name }}</strong>
+                    <p>{{ question.description }}</p>
+                        <form method="post" action="/exams/">
+                            {% csrf_token %}
+                            Mobile No: <input type="number" name="mobile" required>
+                            Passcode:<input type="text" name="passcode" required>
+                            <input type="hidden" name="q_id" value="{{ question.quiz_id }}">
+                            <button value="submit">Attempt</button>
+                        </form>
+                    <hr>
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+            </div>
+            <div class="col-md-2 updates">
+                Important Updates
+            </div>
+        </div>
+    </div><!-- /.container -->
+
+
+
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+  </body>
+<style>
+    .main{
+        margin-top: 70px;
+    }
+
+
+
+
+
+    .updates
+    {
+        min-height: 200px;
+        border-left: thin solid;
+    }
+
+</style>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>WWCS Online Test</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+{#    <link href="starter-template.css" rel="stylesheet">#}
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse fixed-top">
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="#">Online Test WWCS</a>
+
+
+    </nav>
+
+    <div class="container main">
+        Marks Obtained : {{ marks }}<br>
+        Unattempted : {{ unattempted }}
+
+        {% autoescape off %}
+            {% for quest in question %}
+                <p> <span class="qno">({{ quest.qno }})</span>{{ quest.question }}</p>
+                <input type="radio" name="q_{{quest.qno }}" value="a" disabled>{{ quest.choice_a }}<br>
+                <input type="radio" name="q_{{quest.qno }}" value="b" disabled>{{ quest.choice_b }}<br>
+                <input type="radio" name="q_{{quest.qno }}" value="c" disabled>{{ quest.choice_c }}<br>
+                <input type="radio" name="q_{{quest.qno }}" value="d" disabled>{{ quest.choice_d }}<br>
+                <span class="correct"> Correct Choice :{{ quest.correct }} </span>
+            {% endfor %}
+        {% endautoescape %}
+    </div><!-- /.container -->
+
+
+
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+  </body>
+<style>
+    .main{
+        margin-top: 70px;
+    }
+
+
+    .qno
+    {
+       padding: 0px 5px 0px 5px;
+        font-weight: bold;
+    }
+
+
+    .updates
+    {
+        min-height: 200px;
+        border-left: thin solid;
+    }
+
+    .quiz-title
+    {
+        background-color: saddlebrown;
+        color: white;
+        font-weight: bold;
+        padding: 10px;
+    }
+
+    .correct
+    {
+        color: darkgreen;
+        font-weight: bold;
+    }
+
+</style>
+</html>
+
+
+

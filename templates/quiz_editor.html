@@ -1,0 +1,9 @@
+<form method="post">
+    {% csrf_token %}
+    quiz_id <input type="text" name="quiz_id" id="quiz_id"> <br>
+    quiz_cat <input type="text" name="cat"> <br>
+    author <input type="text" name="author"><br>
+    <textarea name="question_json">
+    </textarea>
+    <button value="submit">Submit</button>
+</form>

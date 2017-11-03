@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.views import View
 from quiz_page.models import quiz
+from homepage.models import students
 
 # Create your views here.
 
@@ -28,11 +29,14 @@ class QuizCategories(View):
 
     def post(self,request):
         passcode = request.POST.get('passcode');
+        mobile = request.POST.get('mobile');
         q_id = request.POST.get('q_id');
 
         try:
             quiz.objects.get(quiz_id=q_id);
-            if (passcode == 'Manu'):
+            if passcode.upper() == 'WWCS':
+                student_details = students(mobile_no=mobile);
+                student_details.save();
                 return HttpResponseRedirect('/online/'+q_id);
             else:
                 return HttpResponse("Incorrect Username or password");

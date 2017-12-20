@@ -34,30 +34,8 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-md-10 categories">
-                <div class="row">
-                    {% for question in questions %}
-                    <div>
-                    <hr>
-                    <strong>{{ question.name }}</strong>
-                    <p>{{ question.description }}</p>
-                        <form method="post" action="/exams/">
-                            {% csrf_token %}
-                            <input type="hidden" name="q_id" value="{{ question.quiz_id }}">
-                            <button value="submit">Attempt</button>
-                        </form>
-                    <hr>
-                    </div>
+       Thank you. You already attempted the test
 
-                    {% endfor %}
-
-                </div>
-            </div>
-            <div class="col-md-2 updates">
-                Important Updates
-            </div>
-        </div>
     </div><!-- /.container -->
 
 

@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone as tz
-from datetime import datetime,timedelta
+from datetime import timedelta
 
 # Create your models here.
 
@@ -13,6 +13,7 @@ class quiz(models.Model):
     exp_dt = models.DateField(default=tz.now() + timedelta(days=7))
     auth = models.CharField(max_length=100,null=False)
     questions = models.TextField()
+    result_hold = models.BooleanField(default=None)
 
     def __unicode__(self):
         return self.id

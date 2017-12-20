@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>WWCS Online Test</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+{#    <link href="starter-template.css" rel="stylesheet">#}
+  </head>
+
+  <body>
+
+    {% include "navbar.html" %}
+
+    <div class="container main">
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" name="name" placeholder="Name" required><br>
+            <input type="text" name="location" placeholder="District" required><br>
+            <input type="text" name="school" placeholder="School" required><br>
+            <input type="date" name="dob" placeholder="Date of Birth" required><br>
+            <input type="text" name="parent" placeholder="Parent Contact Number " required><br>
+            <input type="submit" value="Submit">
+        </form>
+    </div><!-- /.container -->
+
+
+
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+  </body>
+
+<style>
+        form {
+          margin:0 auto;
+          width:600px
+        }
+        input {
+            margin-left: 15px;
+          margin-bottom:3px;
+          padding:10px;
+          width: 80%;
+          border:1px solid #CCC
+        }
+        button {
+          padding:10px
+        }
+
+
+    .main
+    {
+        margin-top: 100px;
+    }
+
+    input[type="date"]:before {
+    content: attr(placeholder) !important;
+    color: #aaa;
+    margin-right: 0.5em;
+  }
+  input[type="date"]:focus:before,
+  input[type="date"]:valid:before {
+    content: "";
+  }
+
+</style>
+</html>

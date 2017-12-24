@@ -16,10 +16,12 @@ class QuizPage(View):
                 return render(request, 'attempted.html');
             else:
                 try:
-                    question = json.loads(quiz.objects.get(quiz_id=q_id).questions);
+                    quiz_obj = quiz.objects.get(quiz_id=q_id)
+                    question = json.loads(quiz_obj.questions);
                     context = {
-                        'quiz_id': 'current-1',
-                        'questions': question
+                        'quiz_id': quiz_obj.quiz_id,
+                        'questions': question,
+                        'timer_sec':quiz_obj.timer_sec
                     }
                     return render(request, 'quiz_page.html', context);
                 except:

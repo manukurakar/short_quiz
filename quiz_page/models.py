@@ -14,6 +14,7 @@ class quiz(models.Model):
     auth = models.CharField(max_length=100,null=False)
     questions = models.TextField()
     result_hold = models.BooleanField(default=None)
+    timer_sec = models.IntegerField(default=600)
 
     def __unicode__(self):
         return self.id

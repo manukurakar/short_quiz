@@ -6,6 +6,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
 
     <title>WWCS Online Test</title>
 
@@ -22,41 +24,35 @@
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand" href="#">Online Test WWCS</a>
+      <a class="navbar-brand" href="#"> Walk With A Civil Servant Online Learning</a>
 
 
     </nav>
 
     <div class="container main">
-        <div class="row">
-            <div class="col-md-6">
-                <h4> Walk With A Civil Servant Online Learning</h4>
-            </div>
-        </div>
 
         <div class="row">
             <div class="col-md-10 categories">
                 <div class="row">
-                    {% for question in questions %}
-                    <div>
-                    <hr>
-                    <strong>{{ question.name }}</strong>
-                    <p>{{ question.description }}</p>
-                        <form method="post" action="/exams/">
-                            {% csrf_token %}
-                            <input type="hidden" name="q_id" value="{{ question.quiz_id }}">
-                            <button value="submit">Attempt</button>
-                        </form>
-                    <hr>
-                    </div>
+                    <div id="accordion">
+                        {% for question in questions %}
+                            <section>{{ question.name }}</section>
+                              <div>
+                                {% autoescape off %}
+                                    {{ question.description }}
+                                {% endautoescape %}
 
-                    {% endfor %}
+                                <form method="post" action="/exams/">
+                                {% csrf_token %}
+                                <input type="hidden" name="q_id" value="{{ question.quiz_id }}">
+                                <button value="submit">Attempt</button>
+                                </form>
+                              </div>
+                        {% endfor %}
 
+                    </div> {#Accordian close#}
                 </div>
-            </div>
-            <div class="col-md-2 updates">
-                Important Updates
-            </div>
+           </div>
         </div>
     </div><!-- /.container -->
 
@@ -70,6 +66,16 @@
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+       $( function() {
+    $( "#accordion" ).accordion({
+        active: false,
+        collapsible: true
+    });
+  } );
+  </script>
   </body>
 <style>
     .main{

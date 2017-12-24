@@ -18,19 +18,22 @@
 
   <body>
 
-    <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse fixed-top">
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <a class="navbar-brand" href="#">Online Test WWCS</a>
 
+    <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse fixed-top">
+
+
+        <ul class="nav navbar-nav navbar-right">
+            <li class="custom-nav">Online Learning</li>
+        </ul>
 
     </nav>
 
+
+
     <div class="container main">
         <div class="row">
-            <div class="col-md-8">
-            <form method="post">
+            <div class="col-md-8 question-div">
+            <form id="response_form" method="post">
             <input type="hidden" value="{{ quiz_id }}" name="quiz_id">
             {% csrf_token %}
             {% autoescape off %}
@@ -55,6 +58,10 @@
         </div>
 
     </div><!-- /.container -->
+    <div id="footer">
+        Remaining Time : <span id="timer"></span>
+    </div>
+
 
 
 
@@ -66,6 +73,35 @@
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
+
+  <script>
+      var c=600;
+        var t;
+        timedCount();
+
+        function timedCount() {
+
+            var hours = parseInt(c / 3600) % 24;
+            var minutes = parseInt(c / 60) % 60;
+            var seconds = c % 60;
+
+            var result = (hours < 10 ? "0" + hours : hours) + ":" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds);
+
+
+            $('#timer').html(result);
+            if (c == 0) {
+                //setConfirmUnload(false);
+                //$("#quiz_form").submit();
+                $('#response_form').submit();
+            }
+            c = c - 1;
+            t = setTimeout(function () {
+                        timedCount()
+                    },
+                    1000);
+        }
+  </script>
   </body>
 <style>
     .main{
@@ -76,6 +112,32 @@
     {
        padding: 0px 5px 0px 5px;
         font-weight: bold;
+    }
+
+    .custom-nav
+    {
+        color:white;
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+    #footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background-color: darkgreen;
+        color: white;
+        text-align: center;
+        padding-top: 10px;
+        padding-bottom: 10px;
+
+}
+    .question-div
+    {
+        margin-bottom: 50px;
+        padding-left: 10px;
+        padding-right: 10px;
+        margin-left: 5px;
+        margin-right: 5px;
     }
 
 

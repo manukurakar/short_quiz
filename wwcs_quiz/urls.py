@@ -16,16 +16,18 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.conf.urls import url, include
-from homepage.views import LandingPage,QuizCategories,QuizEditor, LoginUser, RegisterUser, LogoutUser, UserProfile
+from homepage.views import *
 from quiz_page.views import QuizPage
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', LoginUser.as_view()),
     url(r'^login/$', LoginUser.as_view()),
+    url(r'^manage_users/$', ManagePage.as_view()),
     url(r'^logout/$', LogoutUser.as_view()),
     url(r'^dashboard/$', LandingPage.as_view()),
     url(r'^profile/$', UserProfile.as_view()),
+    url(r'^readuser/$', CreateUserFromFile.as_view()),
     url(r'^register/$', RegisterUser.as_view()),
     url(r'^online/(\S+)/$', QuizPage.as_view()),
     url(r'^exams/$', QuizCategories.as_view()),

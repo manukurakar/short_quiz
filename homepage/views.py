@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout,user_logged_in
 from django.views import View
 from quiz_page.models import quiz
 from homepage.models import students
+from homepage.models import studentResponse
 from django.contrib.auth.models import User
 from homepage.user_reg_form import RegistrationForm
 import regex as re
@@ -112,6 +113,17 @@ class RegisterUser(View):
         return is_valid,error_det
 
 
+class CreateUserFromFile(View):
+    def get(self,request):
+        with open('users.txt','r') as data:
+            count = 1
+            for line in data:
+                user = User.objects.create_user(username=line, password='wwcs')
+                user.save();
+        return HttpResponse("Check log")
+
+
+
 
 
 
@@ -174,12 +186,30 @@ class UserProfile(View):
     def post(self,request):
         if request.user.is_authenticated:
             mobile_no = request.user.username
+            name = request.POST.get('name')
             location = request.POST.get('location')
             school = request.POST.get('school')
             dob = request.POST.get('dob')
             parent_contact = request.POST.get('parent')
-            profile = students(mobile_no=mobile_no,location=location,school=school,dob=dob,parent_contact=parent_contact)
+            profile = students(mobile_no=mobile_no,location=location,school=school,dob=dob,parent_contact=parent_contact,name=name)
             profile.save()
             return HttpResponseRedirect('/dashboard/')
         else:
             return HttpResponseRedirect('/login/')
+
+
+class ManagePage(View):
+    def get(self,request):
+        if request.user.is_authenticated:
+            user_details = students.objects.all()
+            student_res = studentResponse.objects.all()
+            context = {'user_det': user_details,
+                       'std_rsp':student_res}
+            if request.user.is_staff:
+                return render(request,'manage.html',context)
+            else:
+                return HttpResponse("You are not authorised to view this")
+        else:
+            return HttpResponseRedirect('/login/')
+    def post(self,request):
+        pass

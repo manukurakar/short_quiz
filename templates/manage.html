@@ -6,6 +6,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
 
     <title>WWCS Online Test</title>
 
@@ -22,26 +24,46 @@
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand" href="#">Online Test WWCS</a>
+      <a class="navbar-brand" href="#"> Walk With A Civil Servant Online Learning</a>
 
 
     </nav>
 
     <div class="container main">
-        <div class="row">
-            <div class="col-md-6">
-                <h4> Walk With A Civil Servant Online Learning</h4>
-            </div>
+        <div>
+            <h3>Total Registrations :  50 </h3>
         </div>
-        <p></p>
-        Thank you for attempting the test. Your test is sucessfully saved. We will publish result soon.
-        For answers, please write to  walkwithacivilservent@gmail.com
+        <div>
+            <strong> List of Users</strong>
+            <table>
+            <th>Mobile</th> <th>Registered On</th><th>Location</th>
+                {% for users in user_det %}
+                    <tr>
+                        <td class="table-data">{{ users.mobile_no }}</td>
+                        <td class="table-data">{{ users.name }}</td>
+                        <td class="table-data">{{ users.location }}</td>
+                    </tr>
+                {% endfor %}
 
-        <h3><a href="https://docs.google.com/forms/d/e/1FAIpQLSdTsVKRdpTXWP5BBOayHkTkgUWh-QlsIWwWZnrNT3Fygx4CSw/viewform">
-            Please attend this survey. Click Here
-        </a> </h3>
+            </table>
+        </div>
 
-    </div><!-- /.container -->
+        <div>
+            <h3> Details of Students Response</h3>
+
+            <table>
+            <th>Mobile</th> <th>Quiz Code</th><th>Marks</th>
+                {% for resp in std_rsp %}
+                    <tr>
+                        <td class="table-data">{{ resp.mobile_no }}</td>
+                        <td class="table-data">{{ resp.quiz_id }}</td>
+                        <td class="table-data">{{ resp.marks }}</td>
+                    </tr>
+                {% endfor %}
+
+            </table>
+        </div>
+    </div>
 
 
 
@@ -53,20 +75,41 @@
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+       $( function() {
+    $( "#accordion" ).accordion({
+        active: false,
+        collapsible: true
+    });
+  } );
+  </script>
   </body>
 <style>
     .main{
         margin-top: 70px;
     }
-
-
-
-
+    .side-panel
+    {
+        border-right:  solid;
+        height: 500px;
+    }
 
     .updates
     {
         min-height: 200px;
         border-left: thin solid;
+    }
+    .table-row
+    {
+        width: 70px;
+    }
+
+    .table-data
+    {
+        padding-right: 10px;
+        padding-left: 10px;
     }
 
 </style>

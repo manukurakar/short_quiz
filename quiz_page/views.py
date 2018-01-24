@@ -34,6 +34,7 @@ class QuizPage(View):
         if request.user.is_authenticated:
             quiz_id = request.POST.get('quiz_id');
             quiz_obj = quiz.objects.get(quiz_id=quiz_id)
+            timer = request.POST.get('timer');
             question = json.loads(quiz_obj.questions);
             hold = quiz_obj.result_hold
             total_questions = len(question);
@@ -56,7 +57,7 @@ class QuizPage(View):
                     student_score.append(items['marks'])
             total_score = sum(student_score);
             unattempted = student_response.count(None)
-            save_marks = studentResponse(mobile_no=request.user.username,quiz_id=quiz_id,marks=total_score,student_response=student_response)
+            save_marks = studentResponse(mobile_no=request.user.username,quiz_id=quiz_id,marks=total_score,student_response=student_response,time_remaining=timer)
             save_marks.save()
             context = {
                 'marks':total_score,

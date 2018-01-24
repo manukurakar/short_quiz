@@ -35,6 +35,7 @@
             <div class="col-md-8 question-div">
             <form id="response_form" method="post">
             <input type="hidden" value="{{ quiz_id }}" name="quiz_id">
+            <input type="hidden" name="timer" value="" id="timer1">
             {% csrf_token %}
             {% autoescape off %}
                 {% for question in questions %}
@@ -48,7 +49,7 @@
                 {% endfor %}
             {% endautoescape %}
             <br>
-            <button type="submit">Submit</button>
+            <button id="submit_quiz">Submit</button>
             </form>
 
             </div>
@@ -80,6 +81,11 @@
         var t;
         timedCount();
 
+      $('#submit').on("click",function() {
+        document.getElementById("timer1").value = c;
+        $('#response_form').submit();
+            });
+
         function timedCount() {
 
             var hours = parseInt(c / 3600) % 24;
@@ -90,14 +96,16 @@
 
 
             $('#timer').html(result);
-            if (c == 0) {
-                //setConfirmUnload(false);
-                //$("#quiz_form").submit();
-                $('#response_form').submit();
-            }
             c = c - 1;
+
+
             t = setTimeout(function () {
-                        timedCount()
+                        timedCount();
+                if (c == 0) {
+                    console.log("Timer Expired. Auto submitting")
+                document.getElementById("timer1").value = c;
+                document.getElementById("response_form").submit();
+            }
                     },
                     1000);
         }

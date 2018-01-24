@@ -29,6 +29,7 @@ class studentResponse(models.Model):
     attempted_date = models.DateField(default=tz.now())
     marks = models.DecimalField(max_digits=6,decimal_places=2)
     student_response = models.TextField()
+    time_remaining = models.BigIntegerField(default=0)
 
     def __unicode__(self):
         return self.mobile_no

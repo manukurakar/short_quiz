@@ -99,9 +99,9 @@ class RegisterUser(View):
         mobile = new_user_data.get('mobile');
         password = new_user_data.get('password');
         password1 = new_user_data.get('password1');
-        if not re.match(r'^[789]\d{9}$', mobile, flags=0):
-            is_valid = False
-            error_det.append("Invalid Mobile number.<br> ");
+        # if not re.match(r'^[789]\d{9}$', mobile, flags=0):
+        #     is_valid = False
+        #     error_det.append("Invalid Mobile number.<br> ");
         # Check whether mobile number already registered or not
         if User.objects.filter(username=mobile).count():
             is_valid = False
